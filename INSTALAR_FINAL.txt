@@ -1,0 +1,31 @@
+estabulo_VT v3.0.0 FINAL
+
+1. Faça BACKUP da pasta antiga e do banco.
+2. Substitua a pasta estabulo_VT.
+3. Execute APENAS UM dos arquivos abaixo (eles possuem o mesmo conteúdo consolidado):
+   sql/SQL_COMPLETA_V3_FINAL.sql
+
+   Não execute as migrações antigas uma por uma.
+
+4. Garanta a ordem no server.cfg:
+   ensure oxmysql
+   ensure vorp_core
+   ensure vorp_inventory
+   ensure estabulo_VT
+
+5. Reinicie:
+   stop estabulo_VT
+   refresh
+   ensure estabulo_VT
+
+6. No console deve aparecer:
+   [estabulo_VT] Banco de dados: OK
+   [estabulo_VT] v3.0.0 FINAL carregada com sucesso.
+
+7. Comando administrativo de diagnóstico:
+   estabulostatus
+
+IMPORTANTE:
+- Não apague a tabela lrrp_horses.
+- INSTALL_FINAL_V3.sql é aditivo e preserva os cavalos existentes.
+- Guarde o ZIP v2.5.0 como rollback.
