@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><title>LRRP Stables</title></head>
+<body>
+<main id="app" class="hidden">
+  <section class="panel">
+    <header><div><span class="eyebrow">LRRP ROLEPLAY</span><h1>Estábulo</h1><p id="stableName">Gerencie seus cavalos.</p></div><button id="close" class="icon">✕</button></header>
+    <nav class="tabbar" aria-label="Seções do estábulo"><button class="tab active" data-tab="horses" data-label="Meus cavalos" title="Meus cavalos" aria-label="Meus cavalos"><span aria-hidden="true">🐎</span></button><button class="tab" data-tab="shop" data-label="Loja" title="Loja" aria-label="Loja"><span aria-hidden="true">🛒</span></button><button class="tab" data-tab="care" data-label="Cuidados" title="Cuidados" aria-label="Cuidados"><span aria-hidden="true">❤️</span></button><button class="tab" data-tab="equipment" data-label="Acessórios" title="Acessórios" aria-label="Acessórios"><span aria-hidden="true">🎒</span></button><button class="tab" data-tab="performance" data-label="Desempenho" title="Desempenho" aria-label="Desempenho"><span aria-hidden="true">📈</span></button><button class="tab" data-tab="breeding" data-label="Criação" title="Criação" aria-label="Criação"><span aria-hidden="true">🧬</span></button><button class="tab" data-tab="health" data-label="Saúde" title="Saúde" aria-label="Saúde"><span aria-hidden="true">🩺</span></button><button class="tab" data-tab="races" data-label="Corridas" title="Corridas" aria-label="Corridas"><span aria-hidden="true">🏁</span></button><button class="tab" data-tab="market" data-label="Mercado" title="Mercado" aria-label="Mercado"><span aria-hidden="true">💰</span></button><button class="tab" data-tab="ranch" data-label="Rancho" title="Rancho" aria-label="Rancho"><span aria-hidden="true">🏡</span></button><button class="tab" data-tab="auction" data-label="Leilão" title="Leilão" aria-label="Leilão"><span aria-hidden="true">🔨</span></button><button class="tab" data-tab="championship" data-label="Campeonato" title="Campeonato" aria-label="Campeonato"><span aria-hidden="true">🏆</span></button><button class="tab" data-tab="ranchops" data-label="Operação do Rancho" title="Operação do Rancho" aria-label="Operação do Rancho"><span aria-hidden="true">👨‍🌾</span></button><button class="tab" data-tab="multirace" data-label="Corrida MP" title="Corrida MP" aria-label="Corrida MP"><span aria-hidden="true">👥</span></button><button class="tab" data-tab="ranchbuild" data-label="Construção" title="Construção" aria-label="Construção"><span aria-hidden="true">🪵</span></button><button class="tab" data-tab="transport" data-label="Transporte" title="Transporte" aria-label="Transporte"><span aria-hidden="true">🚚</span></button><button class="tab" data-tab="profession" data-label="Profissões" title="Profissões" aria-label="Profissões"><span aria-hidden="true">💼</span></button><button class="tab" data-tab="admin" data-label="Staff" title="Staff" aria-label="Staff"><span aria-hidden="true">🛡️</span></button><button class="tab" data-tab="release" data-label="Release" title="Release" aria-label="Release"><span aria-hidden="true">ℹ️</span></button></nav>
+    <div id="content"></div>
+    <footer><span>ESC para fechar</span><span id="count"></span></footer>
+  </section>
+  <aside class="camera-tools">
+    <div class="camera-title">EXPOSIÇÃO 3D</div>
+    <div class="tool-row"><button onclick="orbit(-15)">↶ Câmera</button><button onclick="orbit(15)">Câmera ↷</button></div>
+    <div class="tool-row"><button onclick="rotate(-15)">↶ Cavalo</button><button onclick="rotate(15)">Cavalo ↷</button></div>
+    <div class="tool-row"><button onclick="zoom(-.35)">＋ Zoom</button><button onclick="zoom(.35)">－ Zoom</button></div>
+    <small>Roda do mouse: rolar menu • ← → gira o cavalo</small>
+  </aside>
+</main>
+<div id="horseContext" class="horse-context hidden">
+  <div class="horse-context-title">🐎 CAVALO</div>
+  <div id="horseContextStats" class="horse-context-stats">
+    <span>⭐ XP <strong id="hcXp">0</strong></span>
+    <span>🤝 Bonding <strong id="hcBonding">0</strong></span>
+    <span>🏇 Treino <strong id="hcTraining">0</strong></span>
+  </div>
+  <button data-care="pet">❤️ <span><strong>Carinho</strong><small>Interagir e aumentar vínculo</small></span></button>
+  <button data-care="brush">🧹 <span><strong>Escovar</strong><small>Requer horsebrush • não consome</small></span></button>
+  <button data-care="feed">🌾 <span><strong>Alimentar</strong><small>Consome 1x horsemeal • recupera fome</small></span></button>
+  <button data-care="water">💧 <span><strong>Dar água</strong><small>Consome 1x water • recupera sede</small></span></button>
+  <button data-care="river">🌊 <span><strong>Beber no rio</strong><small>Sem consumir item • precisa estar na água</small></span></button>
+  <button data-care="train">🏇 <span><strong>Treinar</strong><small>Ganha XP, bonding e treinamento</small></span></button>
+  <button data-care="bag">🎒 <span><strong>Abrir alforje</strong><small>Abre o inventário próprio deste cavalo</small></span></button>
+  <div class="horse-context-subtitle">COMPORTAMENTO</div>
+  <button data-care="temperament">🧠 <span><strong>Temperamento</strong><small>Mostra a personalidade deste cavalo</small></span></button>
+  <button data-care="health">🩺 <span><strong>Saúde</strong><small>Mostra ferimentos e recuperação</small></span></button>
+  <button data-care="fixvisual">👁️ <span><strong>Corrigir visual</strong><small>Restaura o cavalo caso fique invisível</small></span></button>
+  <button data-care="follow">🐎 <span><strong>Seguir-me</strong><small>O cavalo acompanha você</small></span></button>
+  <button data-care="stay">✋ <span><strong>Ficar</strong><small>Permanece parado no local</small></span></button>
+  <button data-care="graze">🌿 <span><strong>Pastar / andar livre</strong><small>Fica solto nas proximidades</small></span></button>
+  <button data-care="dismiss">🚪 <span><strong>Mandar embora</strong><small>Salva o estado e dispensa o cavalo</small></span></button>
+  <div class="horse-context-note">💾 Status salvos no MySQL<br>🚫 É preciso estar perto do cavalo</div>
+</div>
+<div id="wildNameModal" class="modal hidden">
+  <div class="modal-card">
+    <h2>🐎 Cavalo domesticado!</h2>
+    <p>Escolha o nome do novo cavalo.</p>
+    <input id="wildHorseName" maxlength="32" value="Cavalo Selvagem" placeholder="Nome do cavalo">
+    <div class="modal-actions">
+      <button id="wildNameCancel" class="secondary">Cancelar</button>
+      <button id="wildNameConfirm">Salvar no estábulo</button>
+    </div>
+  </div>
+</div>
+<div id="trainerOffer" class="modal hidden">
+  <div class="modal-card">
+    <h2>🏇 Serviço de treinamento</h2>
+    <p id="trainerOfferText"></p>
+    <div class="modal-actions">
+      <button id="trainerDecline" class="secondary">Recusar</button>
+      <button id="trainerAccept">Aceitar serviço</button>
+    </div>
+  </div>
+</div>
+<div id="transferOffer" class="modal hidden">
+  <div class="modal-card transfer-offer-card">
+    <h2>🎁 Transferência de cavalo</h2>
+    <p id="transferOfferText"></p>
+    <small>Confira o nome do cavalo e o ID do jogador antes de aceitar.</small>
+    <div class="actions">
+      <button id="transferAccept">✅ Aceitar</button>
+      <button id="transferDecline" class="danger">❌ Recusar</button>
+    </div>
+  </div>
+</div>
+
+<div id="supplyShop" class="modal hidden">
+  <div class="modal-card supply-shop-card">
+    <div class="supply-shop-head">
+      <div>
+        <span class="eyebrow">SUPRIMENTOS</span>
+        <h2 id="supplyShopTitle">Loja de Suprimentos</h2>
+      </div>
+      <button id="supplyShopClose" class="icon">✕</button>
+    </div>
+    <div id="supplyShopItems" class="supply-shop-grid"></div>
+  </div>
+</div>
+<div id="modal" class="modal hidden"><div class="modal-card"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modal-actions"><button id="modalCancel" class="secondary">Cancelar</button><button id="modalConfirm">Confirmar</button></div></div></div>
+<script src="app.js"></script></body></html>

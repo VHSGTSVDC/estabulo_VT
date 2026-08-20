@@ -1,0 +1,7 @@
+CreateThread(function()
+    Wait(2200)
+    print('^6============================================================^7')
+    print('^6[estabulo_VT] v3.0.5 PUBLIC^7')
+    print('^6[estabulo_VT] Criado por Victor Winchester^7')
+    print('^6============================================================^7')
+end)
